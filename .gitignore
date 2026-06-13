@@ -4,3 +4,6 @@ __pycache__/
 
 # Bot Logs
 *.log
+
+# Api
+api_init.py
