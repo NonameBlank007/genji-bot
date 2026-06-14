@@ -4,7 +4,11 @@ from telegram import (
     InlineKeyboardMarkup,
     Update,
 )
-from telegram.ext import Application, CommandHandler, ContextTypes
+from telegram.ext import (
+    Application,
+    CommandHandler,
+    ContextTypes,
+)
 
 from ..util.logging import logger
 from ..util.module import Module

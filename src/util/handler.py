@@ -1,4 +1,7 @@
-from ..module import magisk, start
+from ..module import (
+    magisk,
+    start,
+)
 
 
 class Handlers:
