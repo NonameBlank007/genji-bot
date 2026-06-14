@@ -1,9 +1,10 @@
-from ..module import start
+from ..module import magisk, start
 
 
 class Handlers:
     MODULES = [
         start.StartModule,
+        magisk.MagiskModule,
     ]
 
     @classmethod
