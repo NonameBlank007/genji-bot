@@ -28,9 +28,15 @@ class ColouredFormat(logging.Formatter):
         return self.FORMATS[record.levelno].format(record)
 
 
+class HttpxFilter(logging.Filter):
+    def filter(self, record):
+        return not (record.name.startswith("httpx") and record.levelno <= logging.INFO)
+
+
 logger = logging.getLogger(__name__)
 
 handler = logging.StreamHandler()
 handler.setFormatter(ColouredFormat())
+handler.addFilter(HttpxFilter())
 
 logger.root.addHandler(handler)
