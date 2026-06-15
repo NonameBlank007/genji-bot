@@ -7,7 +7,6 @@ requires-python = ">=3.13"
 dependencies = [
     "python-telegram-bot>=22.8",
     "pytz>=2026.2",
-    "requests>=2.34.2",
 ]
 
 [dependency-groups]
