@@ -1,4 +1,4 @@
-import requests
+import httpx
 from telegram import (
     InlineKeyboardButton,
     InlineKeyboardMarkup,
@@ -22,7 +22,7 @@ class MagiskModule(Module):
 
 def get_magisk_info(url):
     try:
-        data = requests.get(url, timeout=10).json()
+        data = httpx.get(url, timeout=10).json()
         return data["magisk"]["version"], data["magisk"]["link"]
     except Exception:
         logger.critical("Could not fetch contents of magisk.")
