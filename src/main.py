@@ -1,3 +1,4 @@
+import logging
 import time
 
 from telegram import Update
@@ -6,6 +7,8 @@ from telegram.ext import ApplicationBuilder
 from .cfg import TOKEN
 from .util.handler import Handlers
 from .util.logging import logger
+
+logger = logging.getLogger(__name__)
 
 logger.info("Starting bot timer")
 _start_time = time.time()

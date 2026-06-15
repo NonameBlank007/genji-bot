@@ -1,3 +1,5 @@
+import logging
+
 import httpx
 from telegram import (
     InlineKeyboardButton,
@@ -12,6 +14,8 @@ from telegram.ext import (
 
 from ..util.logging import logger
 from ..util.module import Module
+
+logger = logging.getLogger(__name__)
 
 
 class MagiskModule(Module):

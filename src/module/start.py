@@ -1,3 +1,5 @@
+import logging
+
 from telegram import Update
 from telegram.ext import (
     Application,
@@ -7,6 +9,8 @@ from telegram.ext import (
 
 from ..util.logging import logger
 from ..util.module import Module
+
+logger = logging.getLogger(__name__)
 
 
 class StartModule(Module):
