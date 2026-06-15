@@ -1,5 +1,6 @@
 from ..module import (
     magisk,
+    quotes,
     start,
 )
 
@@ -8,6 +9,7 @@ class Handlers:
     MODULES = [
         start.StartModule,
         magisk.MagiskModule,
+        quotes.QuoteModule,
     ]
 
     @classmethod
