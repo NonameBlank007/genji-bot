@@ -26,13 +26,16 @@ async def get_plapx(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
         logger.info(
             f"User: {update.message.from_user.full_name}, Link: {update.message.from_user.link} used /plant command."
         )
+        reply = update.message.reply_to_message
         user_text = " ".join(context.args) if context.args else None
         if user_text is not None:
             plapx_api = f"https://http.garden/{user_text}.jpg"
         else:
             plapx_api = f"https://http.garden/404.jpg"
-        if update.message is not None:
+        if update.message is not None and not reply:
             await update.message.reply_photo(plapx_api)
+        else:
+            await reply.reply_photo(plapx_api)
     except Exception:
         logger.critical("Could not fetch http plant api.")
         await update.message.reply_text("Sorry, I couldn't fetch a plant right now. Please try again later")
