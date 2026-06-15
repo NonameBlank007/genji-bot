@@ -46,9 +46,12 @@ async def magisk(update: Update, contex: ContextTypes.DEFAULT_TYPE) -> None:
     )
     reply_markup = InlineKeyboardMarkup(
         [
-            [InlineKeyboardButton(f"Stable {stable_version}", url=stable_link)],
-            [InlineKeyboardButton(f"Beta {beta_version}", url=beta_link)],
-            [InlineKeyboardButton(f"Canary {canary_version}", url=canary_link)],
+            [InlineKeyboardButton(f"Stable: {stable_version}", url=stable_link)],
+            [InlineKeyboardButton(f"Beta: {beta_version}", url=beta_link)],
+            [InlineKeyboardButton(f"Canary: {canary_version}", url=canary_link)],
         ]
     )
-    await update.message.reply_text("Magisk", reply_markup=reply_markup)
+    if update.message is not None:
+        await update.message.reply_text("Latest Magisk Apks:", reply_markup=reply_markup)
+    else:
+        logger.error("Could not fetch magisk repos.")
