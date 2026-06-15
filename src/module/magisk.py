@@ -55,7 +55,4 @@ async def magisk(update: Update, contex: ContextTypes.DEFAULT_TYPE) -> None:
             [InlineKeyboardButton(f"Canary: {canary_version}", url=canary_link)],
         ]
     )
-    if update.message is not None:
-        await update.message.reply_text("Latest Magisk Apks:", reply_markup=reply_markup)
-    else:
-        logger.error("Could not fetch magisk repos.")
+    await update.message.reply_text("Latest Magisk:", reply_markup=reply_markup)
