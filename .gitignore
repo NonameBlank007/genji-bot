@@ -5,5 +5,11 @@ __pycache__/
 # Bot Logs
 *.log
 
+# Ignore json
+*.json
+
+# Except pyrightconfig
+!pyrightconfig.json
+
 # Api
 api_init.py
