@@ -1,3 +1,10 @@
+#!/usr/bin/env python3
+#
+# Copyright (C) 2026 NonameBlank007
+#
+# SPDX-License-Identifier: GPL-3.0-only
+#
+
 from ..module import (
     catpx,
     dogpx,
