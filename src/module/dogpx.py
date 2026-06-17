@@ -24,7 +24,7 @@ class DogpxModule(Module):
 async def get_dogpx(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
     try:
         logger.info(
-            f"User: {update.message.from_user.full_name}, Link: {update.message.from_user.link} used /dog command."
+            f"({update.message.from_user.id}) in {update.effective_chat.title} ({update.message.chat_id}) used /dog"
         )
         reply = update.message.reply_to_message
         user_text = " ".join(context.args) if context.args else None

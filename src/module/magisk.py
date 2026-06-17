@@ -46,7 +46,7 @@ canary_version, canary_link = get_magisk_info(
 
 async def magisk(update: Update, contex: ContextTypes.DEFAULT_TYPE) -> None:
     logger.info(
-        f"User: {update.message.from_user.full_name}, Link: {update.message.from_user.link} used /magisk command."
+        f"({update.message.from_user.id}) in {update.effective_chat.title} ({update.message.chat_id}) used /magisk"
     )
     reply_markup = InlineKeyboardMarkup(
         [

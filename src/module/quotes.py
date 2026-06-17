@@ -35,7 +35,7 @@ aniote_api = [
 async def quote(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
     try:
         logger.info(
-            f"User: {update.message.from_user.full_name}, Link: {update.message.from_user.link} used /quote command."
+            f"({update.message.from_user.id}) in {update.effective_chat.title} ({update.message.chat_id}) used /quote"
         )
         qapi = random.choice(quote_api)
         async with httpx.AsyncClient() as client:
@@ -52,7 +52,7 @@ async def quote(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
 async def aniote(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
     try:
         logger.info(
-            f"User: {update.message.from_user.full_name}, Link: {update.message.from_user.link} used /aniote command."
+            f"({update.message.from_user.id}) in {update.effective_chat.title} ({update.message.chat_id}) used /aniote"
         )
         aapi = random.choice(aniote_api)
         async with httpx.AsyncClient() as client:

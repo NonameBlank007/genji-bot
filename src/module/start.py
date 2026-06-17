@@ -21,6 +21,6 @@ class StartModule(Module):
 
 async def start(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
     logger.info(
-        f"User: {update.message.from_user.full_name}, Link: {update.message.from_user.link} used /start command."
+        f"({update.message.from_user.id}) in {update.effective_chat.title} ({update.message.chat_id}) used /start"
     )
     await update.message.reply_text("Hello! I'm a bot made by @Noname_Blank")
