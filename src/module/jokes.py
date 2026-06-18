@@ -40,8 +40,8 @@ DAD_JOKES_API = "https://icanhazdadjoke.com/slack"
 
 EXTRACTORS = {
     CHUCKNORRIS_JOKE_API: lambda d: d["value"],
-    SV443_JOKE_API: lambda d: f"{d['setup']} {d['delivery']}",
-    JOKEAPI_API: lambda d: f"{d['setup']} {d['delivery']}",
+    SV443_JOKE_API: lambda d: f"{d['setup']} {d['delivery']}" if "delivery" in d else d["joke"],
+    JOKEAPI_API: lambda d: f"{d['setup']} {d['delivery']}" if "delivery" in d else d["joke"],
     OFFICIAL_JOKES_API: lambda d: f"{d['setup']} {d['punchline']}",
     DAD_JOKES_API: lambda d: d["attachments"][0]["text"],
 }
