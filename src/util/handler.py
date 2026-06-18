@@ -8,6 +8,7 @@
 from ..module import (
     catpx,
     dogpx,
+    facts,
     magisk,
     msg,
     plantpx,
@@ -20,6 +21,7 @@ class Handlers:
     MODULES = [
         start.StartModule,
         magisk.MagiskModule,
+        facts.FactModule,
         msg.MsgModule,
         catpx.CatpxModule,
         quotes.QuoteModule,
