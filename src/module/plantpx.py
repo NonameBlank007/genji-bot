@@ -1,4 +1,3 @@
-#!/usr/bin/env python3
 #
 # Copyright (C) 2026 NonameBlank007
 #
@@ -32,9 +31,7 @@ class PlaModule(Module):
 
 async def get_plapx(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
     try:
-        logger.info(
-            f"({update.message.from_user.id}) in {update.effective_chat.title} ({update.message.chat_id}) used /plant"
-        )
+        logger.info(f"({update.message.from_user.id}): {update.effective_chat.title} ({update.message.chat_id}) used /plant")
         reply = update.message.reply_to_message
         user_text = " ".join(context.args) if context.args else None
         if user_text is not None:

@@ -1,4 +1,3 @@
-#!/usr/bin/env python3
 #
 # Copyright (C) 2026 NonameBlank007
 #
@@ -42,21 +41,15 @@ def get_magisk_info(url):
         return None, None
 
 
-stable_version, stable_link = get_magisk_info(
-    "https://raw.githubusercontent.com/topjohnwu/magisk-files/master/stable.json"
-)
+stable_version, stable_link = get_magisk_info("https://raw.githubusercontent.com/topjohnwu/magisk-files/master/stable.json")
 
 beta_version, beta_link = get_magisk_info("https://raw.githubusercontent.com/topjohnwu/magisk-files/master/beta.json")
 
-canary_version, canary_link = get_magisk_info(
-    "https://raw.githubusercontent.com/topjohnwu/magisk-files/master/canary.json"
-)
+canary_version, canary_link = get_magisk_info("https://raw.githubusercontent.com/topjohnwu/magisk-files/master/canary.json")
 
 
 async def magisk(update: Update, contex: ContextTypes.DEFAULT_TYPE) -> None:
-    logger.info(
-        f"({update.message.from_user.id}) in {update.effective_chat.title} ({update.message.chat_id}) used /magisk"
-    )
+    logger.info(f"({update.message.from_user.id}): {update.effective_chat.title} ({update.message.chat_id}) used /magisk")
     reply_markup = InlineKeyboardMarkup(
         [
             [InlineKeyboardButton(f"Stable: {stable_version}", url=stable_link)],

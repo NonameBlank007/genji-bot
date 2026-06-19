@@ -11,7 +11,6 @@ import sys
 from pathlib import Path
 
 HEADER = """\
-#!/usr/bin/env python3
 #
 # Copyright (C) 2026 NonameBlank007
 #

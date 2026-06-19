@@ -1,4 +1,3 @@
-#!/usr/bin/env python3
 #
 # Copyright (C) 2026 NonameBlank007
 #
@@ -51,9 +50,7 @@ async def joke(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
     async with httpx.AsyncClient() as client:
         try:
             joke_txt = await fetch_joke(client)
-            logger.info(
-                f"({update.message.from_user.id}): {update.effective_chat.title} ({update.message.chat_id}) used /joke"
-            )
+            logger.info(f"({update.message.from_user.id}): {update.effective_chat.title} ({update.message.chat_id}) used /joke")
             await update.message.reply_text(joke_txt)
         except Exception:
             logger.critical("Failed to fetch joke")

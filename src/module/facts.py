@@ -1,4 +1,3 @@
-#!/usr/bin/env python3
 #
 # Copyright (C) 2026 NonameBlank007
 #
@@ -48,9 +47,7 @@ async def fact(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
     async with httpx.AsyncClient() as client:
         try:
             fact = await get_fact(client)
-            logger.info(
-                f"({update.message.from_user.id}): {update.effective_chat.title} ({update.message.chat_id}) used /fact"
-            )
+            logger.info(f"({update.message.from_user.id}): {update.effective_chat.title} ({update.message.chat_id}) used /fact")
             await update.message.reply_text(fact)
         except Exception:
             logger.critical("Could not fetch a fact")

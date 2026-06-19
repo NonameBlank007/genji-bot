@@ -1,4 +1,3 @@
-#!/usr/bin/env python3
 #
 # Copyright (C) 2026 NonameBlank007
 #
@@ -38,17 +37,13 @@ class MsgModule(Module):
 async def send_msg(update: Update, context: ContextTypes.DEFAULT_TYPE):
     txt = " ".join(context.args)  # type: ignore
 
-    logger.info(
-        f"({update.message.from_user.id}) in {update.effective_chat.title} ({update.message.chat_id}) used /msg"
-    )
+    logger.info(f"({update.message.from_user.id}): {update.effective_chat.title} ({update.message.chat_id}) used /msg")
 
     if not txt.strip():
         await update.effective_message.reply_text("Send a text, e.g., /msg hello")
         return
 
-    reply_to = (
-        update.effective_message.reply_to_message.message_id if update.effective_message.reply_to_message else None
-    )
+    reply_to = update.effective_message.reply_to_message.message_id if update.effective_message.reply_to_message else None
     esp_txt = helpers.escape_markdown(txt.replace(r"\n", "\n"), version=2)
 
     await asyncio.gather(
@@ -63,17 +58,13 @@ async def send_msg(update: Update, context: ContextTypes.DEFAULT_TYPE):
 async def send_dmsg(update: Update, context: ContextTypes.DEFAULT_TYPE):
     txt = " ".join(context.args)  # type: ignore
 
-    logger.info(
-        f"({update.message.from_user.id}) in {update.effective_chat.title} ({update.message.chat_id}) used /dmsg"
-    )
+    logger.info(f"({update.message.from_user.id}): {update.effective_chat.title} ({update.message.chat_id}) used /dmsg")
 
     if not txt.strip():
         await update.effective_message.reply_text("Send a text silently, e.g., /dmsg hello")
         return
 
-    reply_to = (
-        update.effective_message.reply_to_message.message_id if update.effective_message.reply_to_message else None
-    )
+    reply_to = update.effective_message.reply_to_message.message_id if update.effective_message.reply_to_message else None
     sesp_txt = helpers.escape_markdown(txt.replace(r"\n", "\n"), version=2)
 
     async def s_del(message):
