@@ -15,6 +15,7 @@ dependencies = [
 
 [dependency-groups]
 dev = [
+    "jurigged>=0.6.1",
     "ruff>=0.15.17",
 ]
 
