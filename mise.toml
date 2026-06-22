@@ -1,0 +1,15 @@
+[tools]
+python = "3.14"
+uv = "0.11"
+
+[tasks.deploy]
+run = "uv run -m src"
+
+[tasks.dev]
+run = "uv run jurigged -v -m src"
+
+[tasks.format]
+run = "uv run ruff format"
+
+[tasks.fix]
+run = "uv run ruff check --fix ."
