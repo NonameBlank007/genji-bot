@@ -17,6 +17,7 @@ from ..module import (
     dogpx,
     facts,
     feed,
+    help,
     highfive,
     hug,
     jokes,
@@ -98,6 +99,7 @@ class Handlers:
         lurk.LurkModule,
         catpx.CatpxModule,
         quotes.QuoteModule,
+        help.HelpModule,
         dogpx.DogpxModule,
         plantpx.PlaModule,
     ]
