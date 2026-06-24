@@ -13,3 +13,6 @@ run = "uv run ruff format"
 
 [tasks.fix]
 run = "uv run ruff check --fix ."
+
+[tasks.license]
+run = "uv run script/header.py"
