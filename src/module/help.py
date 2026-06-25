@@ -28,6 +28,12 @@ from ..util.module import Module
 
 logger = logging.getLogger(__name__)
 keyboard = []
+TYPE_INFO = {
+    "Anime": "Give your members enjoyment of funny gif's from anime series.",
+    "Image": "Keep group engaged with various images",
+    "Misc": "Miscellaneous commands",
+    "TE": "Trivia and Entertainment related commands",
+}
 
 
 class HelpModule(Module):
@@ -80,7 +86,7 @@ async def _callback(update: Update, context: ContextTypes.DEFAULT_TYPE):
 
     cmds = [c for c in CMDS if c["type"] == action]
 
-    text = [f"<b>{action} commands:</b>"]
+    text = [f"{action}\n\n{TYPE_INFO.get(action)}\n\n<b>{action} commands:</b>"]
     text.extend(f"\n- /{c['name']}: {c['description']}." for c in cmds)
     text = " ".join(text)
 
