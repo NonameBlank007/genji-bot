@@ -20,12 +20,14 @@ from telegram.ext import (
     ContextTypes,
 )
 
+from ..util.help import Help
 from ..util.logging import logger
 from ..util.module import Module
 
 logger = logging.getLogger(__name__)
 
 
+@Help.register("wink", "wink at someone", "Anime")
 class WinkModule(Module):
     @classmethod
     def setup(cls, app: Application):

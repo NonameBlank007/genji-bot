@@ -19,12 +19,15 @@ from telegram.ext import (
     ContextTypes,
 )
 
+from ..util.help import Help
 from ..util.logging import logger
 from ..util.module import Module
 
 logger = logging.getLogger(__name__)
 
 
+@Help.register("quote", "send a quote", "TE")
+@Help.register("aniote", "send a anime quote", "TE")
 class QuoteModule(Module):
     @classmethod
     def setup(cls, app: Application):

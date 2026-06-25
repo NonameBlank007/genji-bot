@@ -20,12 +20,14 @@ from telegram.ext import (
     ContextTypes,
 )
 
+from ..util.help import Help
 from ..util.logging import logger
 from ..util.module import Module
 
 logger = logging.getLogger(__name__)
 
 
+@Help.register("hug", "give a warm hug", "Anime")
 class HugModule(Module):
     @classmethod
     def setup(cls, app: Application):
