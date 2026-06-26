@@ -17,6 +17,7 @@ from telegram.ext import (
     ContextTypes,
 )
 
+from ..cfg import SUDO_USER
 from ..util.module import Module
 
 logger = logging.getLogger(__name__)
@@ -48,6 +49,10 @@ def flood(
                 return await func(update, context, *args, **kwargs)
 
             user_id = user.id
+
+            if user_id == int(SUDO_USER):
+                return await func(update, context, *args, **kwargs)
+
             now = time.time()
             until = bans.get(user_id)
 
