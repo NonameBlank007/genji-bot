@@ -19,6 +19,7 @@ from telegram.ext import (
     ContextTypes,
 )
 
+from ..util.flood import flood
 from ..util.help import Help
 from ..util.logging import logger
 from ..util.module import Module
@@ -45,6 +46,7 @@ EXTRACTORS = {
 }
 
 
+@flood()
 async def fact(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
     async with httpx.AsyncClient() as client:
         try:

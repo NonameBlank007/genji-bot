@@ -21,6 +21,7 @@ from telegram.ext import (
     ContextTypes,
 )
 
+from ..util.flood import flood
 from ..util.help import Help
 from ..util.logging import logger
 from ..util.module import Module
@@ -37,6 +38,7 @@ class MsgModule(Module):
         app.add_handler(CommandHandler("dmsg", send_dmsg))
 
 
+@flood(5, 30)
 async def send_msg(update: Update, context: ContextTypes.DEFAULT_TYPE):
     txt = " ".join(context.args)  # type: ignore
 
@@ -58,6 +60,7 @@ async def send_msg(update: Update, context: ContextTypes.DEFAULT_TYPE):
     )
 
 
+@flood(5, 30)
 async def send_dmsg(update: Update, context: ContextTypes.DEFAULT_TYPE):
     txt = " ".join(context.args)  # type: ignore
 

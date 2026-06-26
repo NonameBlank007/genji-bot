@@ -17,6 +17,7 @@ from telegram.ext import (
     ContextTypes,
 )
 
+from ..util.flood import flood
 from ..util.help import Help
 from ..util.logging import logger
 from ..util.module import Module
@@ -31,6 +32,7 @@ class CatpxModule(Module):
         app.add_handler(CommandHandler("cat", get_catpx))
 
 
+@flood()
 async def get_catpx(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
     try:
         logger.info(f"({update.message.from_user.id}): {update.effective_chat.title} ({update.message.chat_id}) used /cat")

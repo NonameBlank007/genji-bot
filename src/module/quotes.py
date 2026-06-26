@@ -19,6 +19,7 @@ from telegram.ext import (
     ContextTypes,
 )
 
+from ..util.flood import flood
 from ..util.help import Help
 from ..util.logging import logger
 from ..util.module import Module
@@ -43,6 +44,7 @@ aniote_api = [
 ]
 
 
+@flood()
 async def quote(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
     try:
         logger.info(f"({update.message.from_user.id}): {update.effective_chat.title} ({update.message.chat_id}) used /quote")
@@ -58,6 +60,7 @@ async def quote(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
         await update.message.reply_text("Sorry, I couldn't fetch a quote right now. Please try again later")
 
 
+@flood()
 async def aniote(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
     try:
         logger.info(f"({update.message.from_user.id}): {update.effective_chat.title} ({update.message.chat_id}) used /aniote")
