@@ -16,3 +16,7 @@ run = "uv run ruff check --fix ."
 
 [tasks.license]
 run = "uv run script/header.py"
+
+[env]
+BOT_TOKEN="1234:AbCd1a3....."
+MASTER_USER="1234....."
