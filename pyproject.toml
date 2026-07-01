@@ -9,6 +9,7 @@ license-files = [
 readme = "README.md"
 requires-python = ">=3.13"
 dependencies = [
+    "orjson>=3.11.9",
     "python-telegram-bot[rate-limiter]>=22.8",
     "pytz>=2026.2",
 ]
