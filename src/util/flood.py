@@ -82,7 +82,9 @@ def flood(
             if len(h) > max_messages:
                 bans[user_id] = now + ban_duration
 
-                logger.info(f"({user.id}): {update.effective_sender.full_name}: {update.effective_chat.title} ({update.message.chat_id})")
+                logger.warning(
+                    f"({user.id}): {update.effective_sender.full_name}: {update.effective_chat.title} ({update.message.chat_id})"
+                )
                 await update.effective_message.reply_text(flood_message)
                 return
 
