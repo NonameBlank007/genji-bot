@@ -7,7 +7,6 @@
 #
 
 import logging
-import os
 
 import httpx
 import orjson as json
@@ -27,6 +26,7 @@ from ..util.flood import flood
 from ..util.help import Help
 from ..util.logging import logger
 from ..util.module import Module
+from ..util.rw import load, wrt
 
 logger = logging.getLogger(__name__)
 
@@ -63,7 +63,7 @@ async def riddle(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
         question = data["riddle"]
         answer = data["answer"]
 
-        save_user_riddle(user_id, question, answer)
+        await wrt(None, user_id, None, RIDDLE_DATA_FILE, question, answer)
 
         message = await update.message.reply_text(
             question,
@@ -84,7 +84,7 @@ async def riddle(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
 async def riddle_answer(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
     user_id = str(update.effective_user.id)
 
-    recent = load_user_riddles().get(user_id)
+    recent = load(RIDDLE_DATA_FILE).get(user_id)
     if not recent:
         return
 
@@ -115,21 +115,3 @@ async def riddle_answer(update: Update, context: ContextTypes.DEFAULT_TYPE) -> N
             ]
         ),
     )
-
-
-def load_user_riddles():
-    if os.path.exists(RIDDLE_DATA_FILE):
-        with open(RIDDLE_DATA_FILE, "rb") as file:
-            return json.loads(file.read())
-    return {}
-
-
-def save_user_riddle(user_id, question, answer):
-    user_riddles = load_user_riddles()
-
-    user_riddles[str(user_id)] = [{"question": question, "answer": answer}]
-
-    data = json.dumps(user_riddles, option=json.OPT_INDENT_2)
-
-    with open(RIDDLE_DATA_FILE, "wb") as f:
-        f.write(data)
