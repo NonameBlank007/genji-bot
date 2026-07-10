@@ -18,6 +18,7 @@ from telegram.ext import (
 from telegram.request import HTTPXRequest
 
 from .cfg import TOKEN
+from .util.client import shutdown
 from .util.handler import Handlers
 from .util.logging import logger
 
@@ -27,7 +28,7 @@ request = HTTPXRequest(http_version="2")
 logger.info("Starting bot timer")
 _start_time = time.time()
 
-app = ApplicationBuilder().token(TOKEN).request(request).rate_limiter(AIORateLimiter()).build()
+app = ApplicationBuilder().token(TOKEN).request(request).rate_limiter(AIORateLimiter()).post_shutdown(shutdown).build()
 
 logger.info("Registering handlers...")
 Handlers.register(app)
