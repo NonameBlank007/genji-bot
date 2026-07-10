@@ -7,9 +7,7 @@
 #
 
 import logging
-import random
 
-import httpx
 from telegram import (
     Update,
 )
@@ -19,6 +17,7 @@ from telegram.ext import (
     ContextTypes,
 )
 
+from ..util.fetch import fetch
 from ..util.flood import flood
 from ..util.help import Help
 from ..util.logging import logger
@@ -51,20 +50,10 @@ EXTRACTORS = {
 
 @flood()
 async def joke(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
-    async with httpx.AsyncClient() as client:
-        try:
-            joke_txt = await fetch_joke(client)
-            logger.info(f"({update.message.from_user.id}): {update.effective_chat.title} ({update.message.chat_id}) used /joke")
-            await update.message.reply_text(joke_txt)
-        except Exception:
-            logger.critical("Failed to fetch joke")
-            await update.message.reply_text("Sorry, I couldn't fetch a joke right now. Please try again later")
-
-
-async def fetch_joke(client: httpx.AsyncClient) -> str:
-    api = random.choice(list(EXTRACTORS))
-    response = await client.get(api, timeout=10)
-    if response.status_code == 200:
-        data = response.json()
-        return EXTRACTORS[api](data)
-    return ""
+    try:
+        joke_txt = await fetch(EXTRACTORS)
+        logger.info(f"({update.message.from_user.id}): {update.effective_chat.title} ({update.message.chat_id}) used /joke")
+        await update.message.reply_text(joke_txt)
+    except Exception:
+        logger.critical("Failed to fetch joke")
+        await update.message.reply_text("Sorry, I couldn't fetch a joke right now. Please try again later")

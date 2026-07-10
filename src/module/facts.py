@@ -7,9 +7,7 @@
 #
 
 import logging
-import random
 
-import httpx
 from telegram import (
     Update,
 )
@@ -19,6 +17,7 @@ from telegram.ext import (
     ContextTypes,
 )
 
+from ..util.fetch import fetch
 from ..util.flood import flood
 from ..util.help import Help
 from ..util.logging import logger
@@ -48,20 +47,10 @@ EXTRACTORS = {
 
 @flood()
 async def fact(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
-    async with httpx.AsyncClient() as client:
-        try:
-            fact = await get_fact(client)
-            logger.info(f"({update.message.from_user.id}): {update.effective_chat.title} ({update.message.chat_id}) used /fact")
-            await update.message.reply_text(fact)
-        except Exception:
-            logger.critical("Could not fetch a fact")
-            await update.message.reply_text("Sorry, I couldn't fetch a fact right now. Please try again later")
-
-
-async def get_fact(client: httpx.AsyncClient) -> str:
-    api = random.choice(list(EXTRACTORS))
-    response = await client.get(api, timeout=10)
-    if response.status_code == 200:
-        data = response.json()
-        return EXTRACTORS[api](data)
-    return ""
+    try:
+        fact = await fetch(EXTRACTORS)
+        logger.info(f"({update.message.from_user.id}): {update.effective_chat.title} ({update.message.chat_id}) used /fact")
+        await update.message.reply_text(fact)
+    except Exception:
+        logger.critical("Could not fetch a fact")
+        await update.message.reply_text("Sorry, I couldn't fetch a fact right now. Please try again later")

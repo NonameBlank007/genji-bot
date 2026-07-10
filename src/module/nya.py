@@ -7,9 +7,7 @@
 #
 
 import logging
-import random
 
-import httpx
 from telegram import (
     Update,
     constants,
@@ -20,6 +18,7 @@ from telegram.ext import (
     ContextTypes,
 )
 
+from ..util.fetch import fetch
 from ..util.flood import flood
 from ..util.help import Help
 from ..util.logging import logger
@@ -45,26 +44,16 @@ EXTRACTORS = {
 
 @flood()
 async def nya(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
-    async with httpx.AsyncClient() as client:
-        try:
-            anime_name, gif = await fetch_nya(client)
-            reply_to = update.effective_message.reply_to_message.message_id if update.effective_message.reply_to_message else None
-            logger.info(f"({update.message.from_user.id}): {update.effective_chat.title} ({update.message.chat_id}) used /nya")
-            await update.message.reply_animation(
-                gif,
-                caption=f"<b>🎬 Anime</b> • <code>{anime_name}</code>",
-                parse_mode=constants.ParseMode.HTML,
-                reply_to_message_id=reply_to,
-            )
-        except Exception:
-            logger.critical("Failed to fetch nya")
-            await update.message.reply_text("Sorry, I couldn't fetch a nya GIF right now. Please try again later")
-
-
-async def fetch_nya(client: httpx.AsyncClient):
-    api = random.choice(list(EXTRACTORS))
-    response = await client.get(api, timeout=10)
-    if response.status_code == 200:
-        data = response.json()
-        return EXTRACTORS[api](data)
-    return ""
+    try:
+        anime_name, gif = await fetch(EXTRACTORS)
+        reply_to = update.effective_message.reply_to_message.message_id if update.effective_message.reply_to_message else None
+        logger.info(f"({update.message.from_user.id}): {update.effective_chat.title} ({update.message.chat_id}) used /nya")
+        await update.message.reply_animation(
+            gif,
+            caption=f"<b>🎬 Anime</b> • <code>{anime_name}</code>",
+            parse_mode=constants.ParseMode.HTML,
+            reply_to_message_id=reply_to,
+        )
+    except Exception:
+        logger.critical("Failed to fetch nya")
+        await update.message.reply_text("Sorry, I couldn't fetch a nya GIF right now. Please try again later")
