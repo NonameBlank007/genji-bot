@@ -10,8 +10,9 @@ readme = "README.md"
 requires-python = ">=3.13"
 dependencies = [
     "aiofiles>=25.1.0",
+    "httpx[http2]>=0.28.1",
     "orjson>=3.11.9",
-    "python-telegram-bot[rate-limiter]>=22.8",
+    "python-telegram-bot[http2,rate-limiter]>=22.8",
     "pytz>=2026.2",
 ]
 
