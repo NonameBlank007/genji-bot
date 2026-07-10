@@ -11,6 +11,9 @@ from ..util.logging import logger
 
 client = httpx.AsyncClient(
     http2=True,
+    headers={
+        "User-Agent": ("GenjiTGBot (https://github.com/nonameblank007/genji-bot)"),
+    },
     timeout=10,
     follow_redirects=True,
 )
