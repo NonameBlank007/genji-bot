@@ -14,7 +14,7 @@ client = httpx.AsyncClient(
     headers={
         "User-Agent": ("GenjiTGBot (https://github.com/nonameblank007/genji-bot)"),
     },
-    timeout=10,
+    timeout=30,
     follow_redirects=True,
 )
 
