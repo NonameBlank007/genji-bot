@@ -495,6 +495,14 @@ async def media_result_back(update, context):
     )
 
 
+async def _send_not_found(update: Update, media_name: str, api_down: bool = False) -> None:
+    caption = f"{media_name.title()} not found :("
+    if api_down:
+        caption += "\nAnilist down. Try again later"
+    with open("images/util/404.jpg", "rb") as photo:
+        await update.message.reply_photo(photo=photo, caption=caption)
+
+
 async def media_search(
     update: Update,
     context: ContextTypes.DEFAULT_TYPE,
@@ -509,6 +517,7 @@ async def media_search(
         await update.message.reply_text(f"Usage: /{media_name} <{media_name} title>")
         return
 
+    msg = await update.message.reply_text(f"Searching {media_name}...")
     media = get_cached_media(
         txt,
         media_type=media_type,
@@ -529,35 +538,24 @@ async def media_search(
             )
         except httpx.HTTPStatusError as e:
             logger.error("AniList request failed: %s", e)
-
+            await msg.delete()
             if e.response.status_code == 404:
-                with open("images/util/404.jpg", "rb") as photo:
-                    await update.message.reply_photo(
-                        photo=photo,
-                        caption=f"{media_name.title()} not found :(",
-                    )
+                await _send_not_found(update, media_name)
                 return
 
             if e.response.status_code == 403:
-                with open("images/util/404.jpg", "rb") as photo:
-                    await update.message.reply_photo(
-                        photo=photo,
-                        caption=f"{media_name.title()} not found :(\nAnilist down. Try again later",
-                    )
+                await _send_not_found(update, media_name, api_down=True)
                 return
 
             return
 
         except (httpx.HTTPError, json.JSONDecodeError):
-            await update.message.reply_text("Anilist api down. Try again later")
+            await _send_not_found(update, media_name, api_down=True)
             return
 
     if not media:
-        with open("images/util/404.jpg", "rb") as photo:
-            await update.message.reply_photo(
-                photo=photo,
-                caption=f"{media_name.title()} not found :(",
-            )
+        await msg.delete()
+        await _send_not_found(update, media_name)
         return
 
     session_id = create_search_session(
@@ -588,6 +586,7 @@ async def media_search(
         session["start_media_id"] = str(media["id"])
 
     with open(card_path, "rb") as photo:
+        await msg.delete()
         await update.message.reply_photo(
             photo=photo,
             caption=text,
