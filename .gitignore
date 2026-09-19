@@ -13,3 +13,6 @@ __pycache__/
 
 # Api
 api_init.py
+
+# Pillow
+images/anilist
