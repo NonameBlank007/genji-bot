@@ -168,7 +168,7 @@ def _connect(db_path=None, media_type="ANIME"):
         CREATE INDEX IF NOT EXISTS search_chains_lookup ON search_chains(search_key, created_at DESC);
         """
     )
-
+    connection.execute("DELETE FROM chain_relations WHERE from_media_id = to_media_id")
     return connection
 
 
@@ -257,17 +257,18 @@ def save_chain_page(
             (page_info.get("lastPage"), int(bool(page_info.get("hasNextPage", True))), chain_id),
         )
         relations = []
-        if previous_media_id is not None:
+        if previous_media_id is not None and str(previous_media_id) != str(media_id):
             relations.append((chain_id, str(media_id), "PREVIOUS", str(previous_media_id)))
             relations.append((chain_id, str(previous_media_id), "NEXT", str(media_id)))
-        if next_media_id is not None:
+        if next_media_id is not None and str(next_media_id) != str(media_id):
             relations.append((chain_id, str(media_id), "NEXT", str(next_media_id)))
             relations.append((chain_id, str(next_media_id), "PREVIOUS", str(media_id)))
-        connection.executemany(
-            "INSERT INTO chain_relations (chain_id, from_media_id, direction, to_media_id) VALUES (?, ?, ?, ?) "
-            "ON CONFLICT(chain_id, from_media_id, direction) DO UPDATE SET to_media_id = excluded.to_media_id",
-            relations,
-        )
+        if relations:
+            connection.executemany(
+                "INSERT INTO chain_relations (chain_id, from_media_id, direction, to_media_id) VALUES (?, ?, ?, ?) "
+                "ON CONFLICT(chain_id, from_media_id, direction) DO UPDATE SET to_media_id = excluded.to_media_id",
+                relations,
+            )
 
 
 def get_chain_relation(chain_id, media_id, direction, media_type="ANIME", db_path=None):
@@ -275,7 +276,8 @@ def get_chain_relation(chain_id, media_id, direction, media_type="ANIME", db_pat
         row = connection.execute(
             "SELECT relations.to_media_id FROM chain_relations AS relations "
             "JOIN media ON media.media_type = ? AND media.media_id = relations.to_media_id "
-            "WHERE relations.chain_id = ? AND relations.from_media_id = ? AND relations.direction = ?",
+            "WHERE relations.chain_id = ? AND relations.from_media_id = ? AND relations.direction = ? "
+            "AND relations.to_media_id != relations.from_media_id",
             (media_type.upper(), chain_id, str(media_id), direction.upper()),
         ).fetchone()
     return row[0] if row else None

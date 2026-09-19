@@ -366,7 +366,7 @@ async def media_result_page(update, context):
 
     relation_direction = "NEXT" if direction == "next" else "PREVIOUS"
     target_id = get_chain_relation(chain_id, current_media_id, relation_direction, media_type) if chain_id else None
-    if target_id:
+    if target_id and str(target_id) != current_media_id:
         media = get_cached_media(target_id, media_type=media_type)
         if media:
             target_page = get_chain_node_page(chain_id, target_id, media_type) or session["page"]
@@ -397,6 +397,21 @@ async def media_result_page(update, context):
     except (httpx.HTTPError, json.JSONDecodeError):
         await callback_query.answer("Anilist down")
         return
+
+    while media and str(media["id"]) == current_media_id:
+        target_page += 1 if direction == "next" else -1
+        if target_page < 1:
+            media = None
+            break
+        try:
+            media, page_info = await fetch_media_page(
+                session["search"],
+                target_page,
+                media_type,
+            )
+        except (httpx.HTTPError, json.JSONDecodeError):
+            await callback_query.answer("Anilist down")
+            return
 
     if not media:
         await callback_query.answer("End of results")
