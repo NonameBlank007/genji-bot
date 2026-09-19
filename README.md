@@ -27,6 +27,10 @@ $ uv run jurigged -v -m src
 ```
 
 # License
+> [!NOTE]
+> **Fonts added in font directory for use are under OFL-V1.1,**
+> **If not strictly mentioned codebase will follow GPL-V3.**
+
 IN SHORT of GPL-V3 ensures any changes to source code MUST stay public.
 
 ```
