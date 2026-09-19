@@ -1,3 +1,9 @@
+#
+# Copyright (C) 2026 NonameBlank007
+#
+# SPDX-License-Identifier: GPL-3.0-only
+#
+
 from telegram import InlineKeyboardButton, InlineKeyboardMarkup
 
 

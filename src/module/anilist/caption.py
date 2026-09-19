@@ -1,3 +1,10 @@
+#
+# Copyright (C) 2026 NonameBlank007
+#
+# SPDX-License-Identifier: GPL-3.0-only
+#
+
+
 def caption(title, native, type, status, count, secondary_count, genres, studios, description, source, score, content_type="ANIME"):
     primary_label = "Chapters" if content_type == "MANGA" else "Episodes"
     secondary_label = "Volumes" if content_type == "MANGA" else "Duration"

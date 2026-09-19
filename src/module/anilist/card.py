@@ -1,3 +1,9 @@
+#
+# Copyright (C) 2026 NonameBlank007
+#
+# SPDX-License-Identifier: GPL-3.0-only
+#
+
 import re
 
 from PIL import Image, ImageDraw, ImageEnhance, ImageFilter, ImageFont

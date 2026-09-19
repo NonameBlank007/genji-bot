@@ -1,3 +1,11 @@
+#
+# Copyright (C) 2026 NonameBlank007
+#
+# SPDX-License-Identifier: GPL-3.0-only
+#
+# Summary: sends anime/manga info
+#
+
 import logging
 from pathlib import Path
 from uuid import uuid4

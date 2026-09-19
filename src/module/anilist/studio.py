@@ -1,3 +1,10 @@
+#
+# Copyright (C) 2026 NonameBlank007
+#
+# SPDX-License-Identifier: GPL-3.0-only
+#
+
+
 def studio(title_y, media, draw, font, color):
     studio_name = ""
     studio_x = 70
