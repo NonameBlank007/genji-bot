@@ -5,6 +5,7 @@
 #
 
 from ..module import (
+    anilistsearch,
     baka,
     bite,
     bleh,
@@ -62,6 +63,7 @@ from ..module import (
 
 class Handlers:
     MODULES = [
+        anilistsearch.ASModule,
         baka.BakaModule,
         bonk.BonkModule,
         bite.BiteModule,
