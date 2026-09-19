@@ -1,3 +1,5 @@
+import re
+
 from PIL import Image, ImageDraw, ImageEnhance, ImageFilter, ImageFont
 
 from .studio import studio
@@ -59,24 +61,14 @@ def _hex_to_rgb(hex_color):
 
 
 def _load_fonts():
-    try:
-        return {
-            "meta": ImageFont.truetype("fonts/isoveka/IosevkaAileNerdFont-Regular.ttf", 24),
-            "title": ImageFont.truetype("fonts/notosans/NotoSans-Regular.ttf", 52),
-            "studio": ImageFont.truetype("fonts/isoveka/IosevkaAileNerdFont-Bold.ttf", 30),
-            "score": ImageFont.truetype("fonts/notosans/NotoSans-Bold.ttf", 55),
-            "logo": ImageFont.truetype("fonts/isoveka/IosevkaAileNerdFont-Bold.ttf", 45),
-            "genre": ImageFont.truetype("fonts/isoveka/IosevkaNerdFont-Medium.ttf", 22),
-        }
-    except OSError:
-        return {
-            "meta": ImageFont.load_default(),
-            "title": ImageFont.load_default(),
-            "studio": ImageFont.load_default(),
-            "score": ImageFont.load_default(),
-            "logo": ImageFont.load_default(),
-            "genre": ImageFont.load_default(),
-        }
+    return {
+        "meta": ImageFont.truetype("fonts/mplus/MPLUSRounded1c-Regular.ttf", 24),
+        "title": ImageFont.truetype("fonts/mplus/MPLUSRounded1c-ExtraBold.ttf", 52),
+        "studio": ImageFont.truetype("fonts/mplus/MPLUSRounded1c-Bold.ttf", 30),
+        "score": ImageFont.truetype("fonts/mplus/MPLUSRounded1c-ExtraBold.ttf", 55),
+        "logo": ImageFont.truetype("fonts/isoveka/IosevkaAileNerdFont-Bold.ttf", 45),
+        "genre": ImageFont.truetype("fonts/mplus/MPLUSRounded1c-Medium.ttf", 22),
+    }
 
 
 def card(banner, cover, cv_clr, media, score, title, card_name=None):
