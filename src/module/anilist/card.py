@@ -71,6 +71,56 @@ def _load_fonts():
     }
 
 
+def flow_cut(title, font, max_width=600, max_lines=3, draw=None) -> list[str]:
+    title = re.sub(r"\s+", " ", str(title or "")).strip()
+    if not title:
+        return []
+    words = title.split()
+
+    def get_width(text):
+        if draw:
+            return draw.textbbox((0, 0), text, font)[2]
+        return font.getbbox(text)[2]
+
+    lines = []
+    words_list = []
+    idx = 0
+
+    while idx < len(words) and len(lines) < max_lines:
+        candidate_words = words_list + [words[idx]]
+        candidate_line = " ".join(candidate_words)
+        if get_width(candidate_line) <= max_width:
+            words_list.append(words[idx])
+            idx += 1
+        else:
+            if words_list:
+                lines.append(words_list)
+                words_list = []
+            else:
+                lines.append([words[idx]])
+                idx += 1
+
+    if words_list and len(lines) < max_lines:
+        lines.append(words_list)
+        words_list = []
+
+    has_overflow = idx < len(words) or bool(words_list)
+
+    res_lines = []
+    for i, line_words in enumerate(lines):
+        if i == max_lines - 1 and has_overflow:
+            while line_words and get_width(" ".join(line_words) + "...") > max_width:
+                line_words.pop()
+            if line_words:
+                res_lines.append(" ".join(line_words) + "...")
+            else:
+                res_lines.append("...")
+        else:
+            res_lines.append(" ".join(line_words))
+
+    return res_lines
+
+
 def card(banner, cover, cv_clr, media, score, title, card_name=None):
     WIDTH = 1200
     HEIGHT = 630
@@ -166,26 +216,8 @@ def card(banner, cover, cv_clr, media, score, title, card_name=None):
     if meta_parts:
         draw.text((60, 55), "  •  ".join(meta_parts), font=fonts["meta"], fill=MUTED)
 
-    max_width = 600
-    words = str(title or "").split()
-    lines = []
-    current = ""
-
-    for word in words:
-        candidate = (current + " " + word).strip()
-        bbox = draw.textbbox((0, 0), candidate, font=fonts["title"])
-        if bbox[2] <= max_width:
-            current = candidate
-        else:
-            if current:
-                lines.append(current)
-            current = word
-
-    if current:
-        lines.append(current)
-
     title_y = 110
-    for line in lines[:3]:
+    for line in flow_cut(title, fonts["title"], max_width=600, max_lines=3, draw=draw):
         draw.text((60, title_y), line, font=fonts["title"], fill=WHITE)
         title_y += 70
 
