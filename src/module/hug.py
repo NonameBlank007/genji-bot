@@ -27,7 +27,7 @@ from ..util.module import Module
 logger = logging.getLogger(__name__)
 
 
-@Help.register("hug", "give a warm hug", "Anime")
+@Help.register("hug", "give a warm hug", "GIF")
 class HugModule(Module):
     @classmethod
     def setup(cls, app: Application):

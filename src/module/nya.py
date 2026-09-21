@@ -27,7 +27,7 @@ from ..util.module import Module
 logger = logging.getLogger(__name__)
 
 
-@Help.register("nya", "kawaii cat", "Anime")
+@Help.register("nya", "kawaii cat", "GIF")
 class NyaModule(Module):
     @classmethod
     def setup(cls, app: Application):

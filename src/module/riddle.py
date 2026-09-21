@@ -31,7 +31,7 @@ from ..util.rw import load, wrt
 logger = logging.getLogger(__name__)
 
 
-@Help.register("riddle", "sends intresting riddles", "TE")
+@Help.register("riddle", "sends intresting riddles", "Fun")
 class RiddleModule(Module):
     @classmethod
     def setup(cls, app: Application):

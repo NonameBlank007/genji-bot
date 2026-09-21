@@ -27,7 +27,7 @@ from ..util.module import Module
 logger = logging.getLogger(__name__)
 
 
-@Help.register("slap", "slap at someone", "Anime")
+@Help.register("slap", "slap at someone", "GIF")
 class SlapModule(Module):
     @classmethod
     def setup(cls, app: Application):

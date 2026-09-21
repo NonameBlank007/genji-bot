@@ -27,7 +27,7 @@ from ..util.module import Module
 logger = logging.getLogger(__name__)
 
 
-@Help.register("think", "think deeply", "Anime")
+@Help.register("think", "think deeply", "GIF")
 class ThinkModule(Module):
     @classmethod
     def setup(cls, app: Application):

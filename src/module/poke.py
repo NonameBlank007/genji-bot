@@ -27,7 +27,7 @@ from ..util.module import Module
 logger = logging.getLogger(__name__)
 
 
-@Help.register("poke", "poke someone", "Anime")
+@Help.register("poke", "poke someone", "GIF")
 class PokeModule(Module):
     @classmethod
     def setup(cls, app: Application):

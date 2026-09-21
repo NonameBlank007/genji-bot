@@ -27,7 +27,7 @@ from ..util.module import Module
 logger = logging.getLogger(__name__)
 
 
-@Help.register("baka", "Say idiot", "Anime")
+@Help.register("baka", "Say idiot", "GIF")
 class BakaModule(Module):
     @classmethod
     def setup(cls, app: Application):

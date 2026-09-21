@@ -26,7 +26,7 @@ from ..util.module import Module
 logger = logging.getLogger(__name__)
 
 
-@Help.register("fact", "get a random fact", "TE")
+@Help.register("fact", "get a random fact", "Fun")
 class FactModule(Module):
     @classmethod
     def setup(cls, app: Application):

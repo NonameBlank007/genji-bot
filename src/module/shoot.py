@@ -27,7 +27,7 @@ from ..util.module import Module
 logger = logging.getLogger(__name__)
 
 
-@Help.register("shoot", "pew pew someone", "Anime")
+@Help.register("shoot", "pew pew someone", "GIF")
 class ShootModule(Module):
     @classmethod
     def setup(cls, app: Application):

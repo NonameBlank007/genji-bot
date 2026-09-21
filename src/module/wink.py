@@ -27,7 +27,7 @@ from ..util.module import Module
 logger = logging.getLogger(__name__)
 
 
-@Help.register("wink", "wink at someone", "Anime")
+@Help.register("wink", "wink at someone", "GIF")
 class WinkModule(Module):
     @classmethod
     def setup(cls, app: Application):

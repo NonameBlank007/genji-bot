@@ -27,7 +27,7 @@ from ..util.module import Module
 logger = logging.getLogger(__name__)
 
 
-@Help.register("confused", "give a confused look", "Anime")
+@Help.register("confused", "give a confused look", "GIF")
 class ConfModule(Module):
     @classmethod
     def setup(cls, app: Application):

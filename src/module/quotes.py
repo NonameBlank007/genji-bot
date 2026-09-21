@@ -27,8 +27,8 @@ from ..util.module import Module
 logger = logging.getLogger(__name__)
 
 
-@Help.register("quote", "send a quote", "TE")
-@Help.register("aniote", "send a anime quote", "TE")
+@Help.register("quote", "send a quote", "Fun")
+@Help.register("aniote", "send a anime quote", "Fun")
 class QuoteModule(Module):
     @classmethod
     def setup(cls, app: Application):

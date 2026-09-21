@@ -27,7 +27,7 @@ from ..util.module import Module
 logger = logging.getLogger(__name__)
 
 
-@Help.register("nom", "nom..nom..., what you looking at?", "Anime")
+@Help.register("nom", "nom..nom..., what you looking at?", "GIF")
 class NomModule(Module):
     @classmethod
     def setup(cls, app: Application):

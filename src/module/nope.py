@@ -27,7 +27,7 @@ from ..util.module import Module
 logger = logging.getLogger(__name__)
 
 
-@Help.register("nope", "nope!", "Anime")
+@Help.register("nope", "nope!", "GIF")
 class NopeModule(Module):
     @classmethod
     def setup(cls, app: Application):

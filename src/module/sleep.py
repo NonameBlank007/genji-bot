@@ -27,7 +27,7 @@ from ..util.module import Module
 logger = logging.getLogger(__name__)
 
 
-@Help.register("sleep", "zzz...", "Anime")
+@Help.register("sleep", "zzz...", "GIF")
 class SleepModule(Module):
     @classmethod
     def setup(cls, app: Application):

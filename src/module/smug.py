@@ -27,7 +27,7 @@ from ..util.module import Module
 logger = logging.getLogger(__name__)
 
 
-@Help.register("smug", "give a smug look", "Anime")
+@Help.register("smug", "give a smug look", "GIF")
 class SmugModule(Module):
     @classmethod
     def setup(cls, app: Application):

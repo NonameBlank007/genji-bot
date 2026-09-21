@@ -29,10 +29,11 @@ from ..util.module import Module
 logger = logging.getLogger(__name__)
 keyboard = []
 TYPE_INFO = {
-    "Anime": "Give your members enjoyment of funny gif's from anime series.",
-    "Image": "Keep group engaged with various images",
-    "Misc": "Miscellaneous commands",
-    "TE": "Trivia and Entertainment related commands",
+    "AniList": "Fetch data about anime and manga from AniList api.",
+    "GIF": "Give your members enjoyment of funny gif's from anime series.",
+    "Fun": "Fun engaging commands for entertainment.",
+    "Image": "Keep group engaged with various images.",
+    "Misc": "Miscellaneous commands"
 }
 
 

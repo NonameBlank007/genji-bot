@@ -27,7 +27,7 @@ from ..util.module import Module
 logger = logging.getLogger(__name__)
 
 
-@Help.register("blush", "blush!", "Anime")
+@Help.register("blush", "blush!", "GIF")
 class BlushModule(Module):
     @classmethod
     def setup(cls, app: Application):

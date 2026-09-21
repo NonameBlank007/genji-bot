@@ -27,7 +27,7 @@ from ..util.module import Module
 logger = logging.getLogger(__name__)
 
 
-@Help.register("wave", "give a wave", "Anime")
+@Help.register("wave", "give a wave", "GIF")
 class WaveModule(Module):
     @classmethod
     def setup(cls, app: Application):

@@ -27,7 +27,7 @@ from ..util.module import Module
 logger = logging.getLogger(__name__)
 
 
-@Help.register("nod", "nod in agreement", "Anime")
+@Help.register("nod", "nod in agreement", "GIF")
 class NodModule(Module):
     @classmethod
     def setup(cls, app: Application):

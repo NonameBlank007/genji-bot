@@ -27,7 +27,7 @@ from ..util.module import Module
 logger = logging.getLogger(__name__)
 
 
-@Help.register("kick", "kick to nothingness", "Anime")
+@Help.register("kick", "kick to nothingness", "GIF")
 class KickModule(Module):
     @classmethod
     def setup(cls, app: Application):

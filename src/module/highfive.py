@@ -27,7 +27,7 @@ from ..util.module import Module
 logger = logging.getLogger(__name__)
 
 
-@Help.register("highfive", "highfive!", "Anime")
+@Help.register("highfive", "highfive!", "GIF")
 class HFModule(Module):
     @classmethod
     def setup(cls, app: Application):

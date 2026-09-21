@@ -27,7 +27,7 @@ from ..util.module import Module
 logger = logging.getLogger(__name__)
 
 
-@Help.register("pat", "pat on the head", "Anime")
+@Help.register("pat", "pat on the head", "GIF")
 class PatModule(Module):
     @classmethod
     def setup(cls, app: Application):

@@ -27,7 +27,7 @@ from ..util.module import Module
 logger = logging.getLogger(__name__)
 
 
-@Help.register("bite", "bite someone l(*w*)l", "Anime")
+@Help.register("bite", "bite someone l(*w*)l", "GIF")
 class BiteModule(Module):
     @classmethod
     def setup(cls, app: Application):

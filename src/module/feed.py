@@ -27,7 +27,7 @@ from ..util.module import Module
 logger = logging.getLogger(__name__)
 
 
-@Help.register("feed", "feed someone", "Anime")
+@Help.register("feed", "feed someone", "GIF")
 class FeedModule(Module):
     @classmethod
     def setup(cls, app: Application):
