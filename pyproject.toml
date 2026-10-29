@@ -12,7 +12,7 @@ dependencies = [
     "aiofiles>=25.1.0",
     "httpx[http2]>=0.28.1",
     "orjson>=3.13.0",
-    "pillow>=12.3.0",
+    "pillow>=13.0.0",
     "python-telegram-bot[http2,rate-limiter]>=22.8",
     "pytz>=2026.5",
 ]
